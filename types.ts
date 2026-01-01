@@ -15,10 +15,10 @@ export interface CaseStudy {
   image: string;
   category: string;
 }
-
 export interface AuditResult {
   headline: string;
   summary: string;
   recommendations: string[];
   projectedGrowth: string;
 }
+
