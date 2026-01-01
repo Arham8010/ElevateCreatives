@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { generateMarketingAudit } from '../services/geminiService';
-import type { AuditResult } from '../types';
+import { generateMarketingAudit } from './geminiService';
+import type { AuditResult } from './types';
 
 const AIAudit: React.FC = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState({
     name: '',
     niche: '',
@@ -22,7 +22,8 @@ const AIAudit: React.FC = () => {
         formData.goals
       );
       setResult(audit);
-    } catch {
+    } catch (error) {
+      console.error(error);
       alert('Something went wrong. Please try again.');
     } finally {
       setLoading(false);
@@ -42,8 +43,8 @@ const AIAudit: React.FC = () => {
             }
           />
 
-          <button disabled={loading} type="submit">
-            {loading ? 'Analyzing...' : 'Generate'}
+          <button type="submit" disabled={loading}>
+            {loading ? 'Analyzing…' : 'Generate'}
           </button>
         </form>
       ) : (
@@ -51,7 +52,7 @@ const AIAudit: React.FC = () => {
           <h3>{result.headline}</h3>
           <p>{result.summary}</p>
 
-          {result.recommendations.map((rec, i) => (
+          {result.recommendations.map((rec: string, i: number) => (
             <p key={i}>{rec}</p>
           ))}
 
